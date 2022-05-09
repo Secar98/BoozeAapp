@@ -28,7 +28,7 @@
     <Drink {drink} />
   {:else}
     <div class="container">
-      <button class="btn" on:click={randomDrink}>Random drink</button>
+      <button class="btn mb" on:click={randomDrink}>Random Drink</button>
       {#each drinks as { strDrinkThumb, strDrink, idDrink } (idDrink)}
         <div class="card">
           <img src={strDrinkThumb} alt={strDrink} />
