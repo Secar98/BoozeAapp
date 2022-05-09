@@ -32,7 +32,7 @@
 
 <style>
   .container {
-    width: 40%;
+    width: 80%;
     margin: auto auto;
   }
 
