@@ -8,4 +8,8 @@ const getMeasurements = (measurements, filter: string) => {
   return Object.entries(measurements).filter((item) => item[0].includes(filter));
 };
 
-export { getIngredients, getMeasurements }
+const shuffleArray = (array) => {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+export { getIngredients, getMeasurements, shuffleArray }
