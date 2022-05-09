@@ -58,7 +58,7 @@
 		padding: 0.5rem;
 		border: 8px dashed #090992;
 		border-radius: 1rem;
-		width: 80%;
+		width: 90%;
 		background-color: #000;
 	}
 
