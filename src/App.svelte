@@ -6,15 +6,14 @@
 
 	let drinksArray;
 	let alcoholic: boolean = true;
-	let active: boolean = true;
 
-	const onClick = () => {
+	const onClick = async () => {
 		alcoholic = alcoholic ? (alcoholic = false) : (alcoholic = true);
-		getDrinks(alcoholic).then((data) => (drinksArray = data));
+		drinksArray = await getDrinks(alcoholic);
 	};
 
-	onMount(() => {
-		getDrinks(alcoholic).then((data) => (drinksArray = data));
+	onMount(async () => {
+		drinksArray = await getDrinks(alcoholic);
 	});
 </script>
 
