@@ -19,4 +19,14 @@ const getDrink = async (id: number) => {
   }
 }
 
-export { getDrinks, getDrink };
+
+const getRandomDrink = async () => {
+  try {
+    const url: string = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
+    const res = await fetch(url);
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+export { getDrinks, getDrink, getRandomDrink };

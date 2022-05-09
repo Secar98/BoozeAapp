@@ -1,6 +1,6 @@
 <script lang="ts">
   import Drink from "./Drink.svelte";
-  import { getDrink } from "../utils/api";
+  import { getDrink, getRandomDrink } from "../utils/api";
   export let drinks;
 
   let drink;
@@ -9,6 +9,13 @@
   const onClick = async (event) => {
     const id = event.target.value;
     drink = await getDrink(id);
+    console.log(drink);
+    active = active ? (active = false) : (active = true);
+  };
+
+  const randomDrink = async () => {
+    const random = await getRandomDrink();
+    drink = random;
     active = active ? (active = false) : (active = true);
   };
 </script>
@@ -21,6 +28,7 @@
     <Drink {drink} />
   {:else}
     <div class="container">
+      <button class="btn" on:click={randomDrink}>Random drink</button>
       {#each drinks as { strDrinkThumb, strDrink, idDrink } (idDrink)}
         <div class="card">
           <img src={strDrinkThumb} alt={strDrink} />
