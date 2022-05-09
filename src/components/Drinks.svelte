@@ -44,7 +44,6 @@
 
 <style>
   main {
-    width: 80%;
     margin: auto auto;
   }
 
