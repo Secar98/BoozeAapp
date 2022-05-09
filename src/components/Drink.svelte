@@ -32,7 +32,7 @@
   .card {
     background: linear-gradient(90deg, #060164 0%, #090979 35%, #0093b0 100%);
     padding: 2rem;
-    margin-bottom: 1rem;
+    max-width: 40%;
     border-radius: 1em;
     color: #eee;
     text-shadow: black 2px 1px;

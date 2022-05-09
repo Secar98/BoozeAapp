@@ -13,25 +13,29 @@
   };
 </script>
 
-<div class="container">
+<main>
   {#if active}
-    <button class="btn mb" on:click={() => (active = false)}>Go Back</button>
+    <button id="button" class="btn mb" on:click={() => (active = false)}
+      >Go Back</button
+    >
     <Drink {drink} />
   {:else}
-    {#each drinks as { strDrinkThumb, strDrink, idDrink } (idDrink)}
-      <div class="card">
-        <img src={strDrinkThumb} alt={strDrink} />
-        <h1>{strDrink}</h1>
-        <button class="btn" value={idDrink} on:click={onClick}
-          >Go To Drink</button
-        >
-      </div>
-    {/each}
+    <div class="container">
+      {#each drinks as { strDrinkThumb, strDrink, idDrink } (idDrink)}
+        <div class="card">
+          <img src={strDrinkThumb} alt={strDrink} />
+          <h1>{strDrink}</h1>
+          <button class="btn" value={idDrink} on:click={onClick}
+            >Go To Drink</button
+          >
+        </div>
+      {/each}
+    </div>
   {/if}
-</div>
+</main>
 
 <style>
-  .container {
+  main {
     width: 80%;
     margin: auto auto;
   }
@@ -40,6 +44,7 @@
     background: linear-gradient(90deg, #060164 0%, #090979 35%, #0093b0 100%);
     padding: 2rem;
     margin-bottom: 1rem;
+    max-width: 512px;
     border-radius: 1em;
     color: #eee;
     text-shadow: black 2px 1px;
@@ -67,5 +72,13 @@
 
   .mb {
     margin-bottom: 1rem;
+  }
+
+  @media only screen and (min-width: 1100px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
   }
 </style>
