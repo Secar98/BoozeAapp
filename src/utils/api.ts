@@ -1,32 +1,26 @@
 const getDrinks = async (alcholic: boolean) => {
   const type = alcholic ? 'Alcoholic' : 'Non_Alcoholic';
   const url: string = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${type}`;
-  try {
-    const res = await fetch(url);
-    return await res.json();
-  } catch (error) {
-    console.error(error);
-  }
+  const res = await fetch(url);
+  return await res.json();
 };
 
 const getDrink = async (id: number) => {
-  try {
-    const url: string = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-    const res = await fetch(url);
-    return await res.json();
-  } catch (error) {
-    console.error(error);
-  }
+  const url: string = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const res = await fetch(url);
+  return await res.json();
 }
-
 
 const getRandomDrink = async () => {
-  try {
-    const url: string = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
-    const res = await fetch(url);
-    return await res.json();
-  } catch (error) {
-    console.error(error);
-  }
+  const url: string = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
+  const res = await fetch(url);
+  return await res.json();
 }
-export { getDrinks, getDrink, getRandomDrink };
+
+const getDrinkByName = async (search: string) => {
+  const url: string = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
+  const res = await fetch(url);
+  return await res.json();
+}
+
+export { getDrinks, getDrink, getRandomDrink, getDrinkByName };

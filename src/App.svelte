@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { getDrinks, getDrinkByName } from "./utils/api";
 
 	import Drinks from "./components/Drinks.svelte";
-	import { getDrinks } from "./utils/api";
+	import Searchbar from "./components/Searchbar.svelte";
 
 	let drinksArray;
 	let alcoholic: boolean = true;
@@ -12,12 +13,25 @@
 		drinksArray = await getDrinks(alcoholic);
 	};
 
+	const onSearch = async (event) => {
+		const { search } = event.detail;
+		if (search) {
+			const result = await getDrinkByName(search);
+			if (result.drinks) {
+				drinksArray = result;
+			}
+		} else {
+			drinksArray = await getDrinks(alcoholic);
+		}
+	};
+
 	onMount(async () => {
 		drinksArray = await getDrinks(alcoholic);
 	});
 </script>
 
 <main>
+	<Searchbar on:search={onSearch} />
 	<button class="btn mb" on:click={onClick}
 		>{alcoholic ? "None_Alchoholic" : "Alchoholic"}</button
 	>
