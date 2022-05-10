@@ -23,7 +23,7 @@
 			if (result.drinks) {
 				drinksArray = shuffleArray(result.drinks);
 			} else {
-				alert(`Could not find drink with term: ${search}`);
+				alert(`Could not find drink with search: ${search}`);
 			}
 		} else {
 			result = await getDrinks(alcoholic);

@@ -15,15 +15,13 @@
 </script>
 
 <div>
-  <form on:submit|preventDefault={() => {}}>
-    <input
-      on:keypress={debounce}
-      type="text"
-      name="searchbar"
-      id="searchbar"
-      placeholder="Search..."
-    />
-  </form>
+  <input
+    on:keyup={debounce}
+    type="text"
+    name="searchbar"
+    id="searchbar"
+    placeholder="Search..."
+  />
 </div>
 
 <style>

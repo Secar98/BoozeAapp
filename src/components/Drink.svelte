@@ -13,15 +13,17 @@
 
 <div class="card">
   <img src={drink.strDrinkThumb} alt={drink.strDrink} />
-  <h1>{drink.strDrink}</h1>
-  <h3>Type: {drink.strCategory}</h3>
-  <h3>Glass: {drink.strGlass}</h3>
-  <h3>Ingredients:</h3>
-  {#each ingredientsAndMeasure as ingList}
-    <li>{ingList}</li>
-  {/each}
-  <h3>Instructions:</h3>
-  <p>{drink.strInstructions}</p>
+  <div>
+    <h1>{drink.strDrink}</h1>
+    <h3>Type: {drink.strCategory}</h3>
+    <h3>Glass: {drink.strGlass}</h3>
+    <h3>Ingredients:</h3>
+    {#each ingredientsAndMeasure as ingList}
+      <li>{ingList}</li>
+    {/each}
+    <h3>Instructions:</h3>
+    <p>{drink.strInstructions}</p>
+  </div>
 </div>
 
 <style>
@@ -39,7 +41,11 @@
 
   @media only screen and (min-width: 768px) {
     .card {
-      max-width: 512px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    img {
+      max-width: 80%;
     }
   }
 </style>
