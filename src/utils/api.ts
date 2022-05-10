@@ -1,5 +1,5 @@
-const getDrinks = async (alcholic: boolean) => {
-  const type = alcholic ? 'Alcoholic' : 'Non_Alcoholic';
+const getDrinks = async (alcholicDrinks: boolean) => {
+  const type = alcholicDrinks ? 'Alcoholic' : 'Non_Alcoholic';
   const url: string = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${type}`;
   const res = await fetch(url);
   return await res.json();

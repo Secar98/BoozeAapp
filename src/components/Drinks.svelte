@@ -14,8 +14,7 @@
   };
 
   const randomDrink = async () => {
-    const random = await getRandomDrink();
-    drink = random;
+    drink = await getRandomDrink();
     active = active ? (active = false) : (active = true);
   };
 </script>
@@ -25,7 +24,7 @@
     <button id="button" class="btn mb" on:click={() => (active = false)}
       >Go Back</button
     >
-    <Drink {drink} />
+    <Drink on:detailedView {drink} />
   {:else}
     <div class="container">
       <button class="btn mb" on:click={randomDrink}>Random Drink</button>

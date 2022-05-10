@@ -3,24 +3,28 @@
   import { shuffleArray } from "../utils/util";
   import { createEventDispatcher } from "svelte";
 
-  export let drinksArray, alcoholic;
+  export let drinksArray, alcoholicDrinks;
 
   const dispatch = createEventDispatcher();
 
   const onClick = async () => {
-    alcoholic = alcoholic ? (alcoholic = false) : (alcoholic = true);
-    const response = await getDrinks(alcoholic);
+    if (alcoholicDrinks) {
+      alcoholicDrinks = false;
+    } else {
+      alcoholicDrinks = true;
+    }
+    const response = await getDrinks(alcoholicDrinks);
     drinksArray = shuffleArray(response.drinks);
-    dispatch("alcoholic", {
+    dispatch("alcoholicDrinks", {
       drinksArray,
-      alcoholic,
+      alcoholicDrinks,
     });
   };
 
-  const getDrinkByIngredient = async (e) => {
-    const ing = e.target.value;
+  const getDrinkByIngredient = async (event) => {
+    const ing = event.target.value;
     const response = await getDrinkWithIngredient(ing);
-    drinksArray = response.drinks;
+    drinksArray = shuffleArray(response.drinks);
     dispatch("drinksByIngredients", {
       drinksByIngredients: drinksArray,
     });
@@ -29,7 +33,7 @@
 
 <div class="buttons mb">
   <button class="btn" on:click={onClick}
-    >{alcoholic ? "None Alchoholic" : "Alchoholic"}</button
+    >{alcoholicDrinks ? "None Alchoholic" : "Alchoholic"}</button
   >
   <button class="btn" value="Gin" on:click={getDrinkByIngredient}>Gin</button>
   <button class="btn" value="Vodka" on:click={getDrinkByIngredient}
