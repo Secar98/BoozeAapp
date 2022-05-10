@@ -8,11 +8,9 @@
   const dispatch = createEventDispatcher();
 
   const onClick = async () => {
-    if (alcoholicDrinks) {
-      alcoholicDrinks = false;
-    } else {
-      alcoholicDrinks = true;
-    }
+    alcoholicDrinks = alcoholicDrinks
+      ? (alcoholicDrinks = false)
+      : (alcoholicDrinks = true);
     const response = await getDrinks(alcoholicDrinks);
     drinksArray = shuffleArray(response.drinks);
     dispatch("alcoholicDrinks", {
