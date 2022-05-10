@@ -4,11 +4,11 @@
   const dispatch = createEventDispatcher();
   let timer;
 
-  const debounce = (e) => {
+  const debounce = (event) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
       dispatch("search", {
-        search: e.target.value,
+        search: event.target.value,
       });
     }, 750);
   };

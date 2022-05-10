@@ -1,7 +1,12 @@
 <script lang="ts">
+  import { createEventDispatcher, onDestroy, onMount } from "svelte";
+
   import { getIngredients, getMeasurements } from "../utils/util";
   export let drink;
   drink = drink.drinks[0];
+
+  const dispatch = createEventDispatcher();
+  let detailedView: boolean;
 
   const ingredients = getIngredients(drink, "strIngredient");
   const measures = getMeasurements(drink, "strMeasure");
@@ -9,6 +14,20 @@
   const ingredientsAndMeasure = ingredients.map((ing, index) => [
     `${ing[1]}: ${measures[index][1] == null ? "" : measures[index][1]}`,
   ]);
+
+  onMount(() => {
+    detailedView = true;
+    dispatch("detailedView", {
+      detailedView,
+    });
+  });
+
+  onDestroy(() => {
+    detailedView = false;
+    dispatch("detailedView", {
+      detailedView,
+    });
+  });
 </script>
 
 <div class="card">
@@ -18,8 +37,8 @@
     <h3>Type: {drink.strCategory}</h3>
     <h3>Glass: {drink.strGlass}</h3>
     <h3>Ingredients:</h3>
-    {#each ingredientsAndMeasure as ingList}
-      <li>{ingList}</li>
+    {#each ingredientsAndMeasure as ingListItem}
+      <li>{ingListItem}</li>
     {/each}
     <h3>Instructions:</h3>
     <p>{drink.strInstructions}</p>

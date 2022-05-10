@@ -6,11 +6,11 @@
 	import Drinks from "./components/Drinks.svelte";
 	import Searchbar from "./components/Searchbar.svelte";
 	import FilterButtons from "./components/FilterButtons.svelte";
-	import Drink from "./components/Drink.svelte";
 	import Footer from "./components/Footer.svelte";
 
 	let drinksArray;
-	let alcoholic: boolean = true;
+	let alcoholicDrinks: boolean = true;
+	let detailedView: boolean = false;
 
 	const onSearch = async (event) => {
 		const { search } = event.detail;
@@ -23,22 +23,26 @@
 				alert(`Could not find drink with search: ${search}`);
 			}
 		} else {
-			response = await getDrinks(alcoholic);
+			response = await getDrinks(alcoholicDrinks);
 			drinksArray = shuffleArray(response.drinks);
 		}
 	};
 
-	const handleOnDrinksByIngredients = (e) => {
-		drinksArray = e.detail.drinksByIngredients;
+	const handleOnDrinksByIngredients = (event) => {
+		drinksArray = event.detail.drinksByIngredients;
 	};
 
-	const handleOnAlcoholic = (e) => {
-		drinksArray = e.detail.drinksArray;
-		alcoholic = e.detail.alcoholic;
+	const handleOnAlcoholic = (event) => {
+		drinksArray = event.detail.drinksArray;
+		alcoholicDrinks = event.detail.alcoholicDrinks;
+	};
+
+	const handleDetailedView = (event) => {
+		detailedView = event.detail.detailedView;
 	};
 
 	onMount(async () => {
-		drinksArray = await getDrinks(alcoholic);
+		drinksArray = await getDrinks(alcoholicDrinks);
 		drinksArray = shuffleArray(drinksArray.drinks);
 	});
 </script>
@@ -46,16 +50,18 @@
 <main>
 	<h1 class="header">IDAS BAR</h1>
 	<Searchbar on:search={onSearch} />
-	<FilterButtons
-		{drinksArray}
-		{alcoholic}
-		on:drinksByIngredients={handleOnDrinksByIngredients}
-		on:alcoholic={handleOnAlcoholic}
-	/>
+	{#if !detailedView}
+		<FilterButtons
+			{drinksArray}
+			{alcoholicDrinks}
+			on:drinksByIngredients={handleOnDrinksByIngredients}
+			on:alcoholicDrinks={handleOnAlcoholic}
+		/>
+	{/if}
 	{#if !drinksArray}
 		<h1>Waiting...</h1>
 	{:else}
-		<Drinks drinks={drinksArray} />
+		<Drinks on:detailedView={handleDetailedView} drinks={drinksArray} />
 	{/if}
 </main>
 <Footer />
@@ -78,15 +84,5 @@
 		border-radius: 1rem;
 		width: 90%;
 		background-color: #000;
-	}
-
-	.btn {
-		background-color: #000;
-		color: #fff;
-		font-size: 1.2em;
-		padding: 1rem;
-		cursor: pointer;
-		border: none;
-		border-radius: 1.5em;
 	}
 </style>
