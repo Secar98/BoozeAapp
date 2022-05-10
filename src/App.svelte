@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { getDrinks, getDrinkByName } from "./utils/api";
+	import {
+		getDrinks,
+		getDrinkByName,
+		getDrinkWithIngredient,
+	} from "./utils/api";
 	import { shuffleArray } from "./utils/util";
 
 	import Drinks from "./components/Drinks.svelte";
@@ -11,24 +15,30 @@
 
 	const onClick = async () => {
 		alcoholic = alcoholic ? (alcoholic = false) : (alcoholic = true);
-		const result = await getDrinks(alcoholic);
-		drinksArray = shuffleArray(result.drinks);
+		const response = await getDrinks(alcoholic);
+		drinksArray = shuffleArray(response.drinks);
 	};
 
 	const onSearch = async (event) => {
 		const { search } = event.detail;
-		let result;
+		let response;
 		if (search) {
-			result = await getDrinkByName(search);
-			if (result.drinks) {
-				drinksArray = shuffleArray(result.drinks);
+			response = await getDrinkByName(search);
+			if (response.drinks) {
+				drinksArray = shuffleArray(response.drinks);
 			} else {
 				alert(`Could not find drink with search: ${search}`);
 			}
 		} else {
-			result = await getDrinks(alcoholic);
-			drinksArray = shuffleArray(result.drinks);
+			response = await getDrinks(alcoholic);
+			drinksArray = shuffleArray(response.drinks);
 		}
+	};
+
+	const getDrinkByIngredient = async (e) => {
+		const ing = e.target.value;
+		const response = await getDrinkWithIngredient(ing);
+		drinksArray = response.drinks;
 	};
 
 	onMount(async () => {
@@ -40,9 +50,22 @@
 <main>
 	<h1 class="header">IDAS BAR</h1>
 	<Searchbar on:search={onSearch} />
-	<button class="btn mb" on:click={onClick}
-		>{alcoholic ? "None_Alchoholic" : "Alchoholic"}</button
-	>
+	<div class="buttons mb">
+		<button class="btn" on:click={onClick}
+			>{alcoholic ? "None Alchoholic" : "Alchoholic"}</button
+		>
+		<button class="btn" value="Gin" on:click={getDrinkByIngredient}>Gin</button>
+		<button class="btn" value="Vodka" on:click={getDrinkByIngredient}
+			>Vodka</button
+		>
+		<button class="btn" value="Amaretto" on:click={getDrinkByIngredient}
+			>Amaretto</button
+		>
+		<button class="btn" value="Rum" on:click={getDrinkByIngredient}>Rum</button>
+		<button class="btn" value="Tequila" on:click={getDrinkByIngredient}
+			>Tequila</button
+		>
+	</div>
 	{#if !drinksArray}
 		<h1>Waiting...</h1>
 	{:else}
@@ -79,7 +102,34 @@
 		border-radius: 1.5em;
 	}
 
+	button:hover {
+		background-color: #2b2b2b;
+		transition: 0.3s;
+	}
+
 	.mb {
 		margin-bottom: 1rem;
+	}
+
+	.buttons {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	@media only screen and (max-width: 512px) {
+		.buttons {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
+		}
+	}
+
+	@media only screen and (max-width: 375px) {
+		.buttons {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
 	}
 </style>
