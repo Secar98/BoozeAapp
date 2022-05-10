@@ -23,4 +23,16 @@ const getDrinkByName = async (search: string) => {
   return await res.json();
 }
 
-export { getDrinks, getDrink, getRandomDrink, getDrinkByName };
+const getDrinkWithIngredient = async (ingredient: string) => {
+  const url: string = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
+  const res = await fetch(url);
+  return await res.json();
+}
+
+export {
+  getDrinks,
+  getDrink,
+  getRandomDrink,
+  getDrinkByName,
+  getDrinkWithIngredient
+};
