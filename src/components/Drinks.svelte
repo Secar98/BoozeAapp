@@ -81,11 +81,18 @@
     margin-bottom: 1rem;
   }
 
+  @media only screen and (min-width: 768px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
   @media only screen and (min-width: 1100px) {
     .container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
     }
   }
 </style>

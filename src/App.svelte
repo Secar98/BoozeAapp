@@ -49,6 +49,11 @@
 </main>
 
 <style>
+	main {
+		max-width: 1080px;
+		margin: auto;
+	}
+
 	.header {
 		text-align: center;
 		font-size: 3em;

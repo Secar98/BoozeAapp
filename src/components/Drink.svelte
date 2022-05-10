@@ -30,9 +30,8 @@
   }
 
   .card {
-    background: linear-gradient(90deg, #07007b 100%, #090979 35%, #0093b0 0%);
+    background: linear-gradient(90deg, #060164 0%, #090979 35%, #0093b0 100%);
     padding: 2rem;
-    max-width: 80%;
     border-radius: 1em;
     color: #eee;
     text-shadow: black 2px 1px;
