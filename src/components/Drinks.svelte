@@ -9,7 +9,6 @@
   const onClick = async (event) => {
     const id = event.target.value;
     drink = await getDrink(id);
-    console.log(drink);
     active = active ? (active = false) : (active = true);
   };
 

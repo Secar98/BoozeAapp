@@ -39,7 +39,6 @@
 
 	const handleDetailedView = (event) => {
 		detailedView = event.detail.detailedView;
-		console.log(detailedView);
 	};
 
 	onMount(async () => {
