@@ -2,7 +2,6 @@
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
-  let val = "";
   let timer;
 
   const debounce = (e) => {
@@ -16,13 +15,15 @@
 </script>
 
 <div>
-  <input
-    on:keyup={debounce}
-    type="text"
-    name="searchbar"
-    id="searchbar"
-    placeholder="Search..."
-  />
+  <form on:submit|preventDefault={() => {}}>
+    <input
+      on:keypress={debounce}
+      type="text"
+      name="searchbar"
+      id="searchbar"
+      placeholder="Search..."
+    />
+  </form>
 </div>
 
 <style>

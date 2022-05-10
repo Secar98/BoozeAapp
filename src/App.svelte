@@ -21,11 +21,13 @@
 		if (search) {
 			result = await getDrinkByName(search);
 			if (result.drinks) {
-				drinksArray = result.drinks;
+				drinksArray = shuffleArray(result.drinks);
+			} else {
+				alert(`Could not find drink with term: ${search}`);
 			}
 		} else {
 			result = await getDrinks(alcoholic);
-			drinksArray = result.drinks;
+			drinksArray = shuffleArray(result.drinks);
 		}
 	};
 
