@@ -1,6 +1,6 @@
 const getIngredients = (ingredients, filter: string) => {
   return Object.entries(ingredients).filter(
-    (item) => item[0].includes(filter) && item[1] !== null
+    (item) => item[0].includes(filter) && item[1] !== null && item[1] !== ""
   );
 };
 
