@@ -6,7 +6,6 @@
 	import Drinks from "./components/Drinks.svelte";
 	import Searchbar from "./components/Searchbar.svelte";
 	import FilterButtons from "./components/FilterButtons.svelte";
-	import Footer from "./components/Footer.svelte";
 
 	let drinksArray;
 	let alcoholicDrinks: boolean = true;
@@ -64,7 +63,6 @@
 		<Drinks on:detailedView={handleDetailedView} drinks={drinksArray} />
 	{/if}
 </main>
-<Footer />
 
 <style>
 	main {
