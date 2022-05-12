@@ -29,4 +29,9 @@ docker build -t svelte .
 ```
 docker run --rm --name=svelte-docker -p 8080:80 svelte
 ```
+
+#### You can also pull the image from Docker Hub:
+```
+docker pull boussemand/boozeapp
+```
 #### This will start the application on http://localhost:8080
