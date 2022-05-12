@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
   import Drink from "./Drink.svelte";
   import { getDrink, getRandomDrink } from "../utils/api";
   export let drinks;
@@ -25,7 +26,11 @@
     >
     <Drink on:detailedView {drink} />
   {:else}
-    <div class="container">
+    <div
+      class="container"
+      in:fly={{ x: -50, duration: 500 }}
+      out:fly={{ x: 50, duration: 500 }}
+    >
       <button class="btn mb" on:click={randomDrink}>Random Drink</button>
       {#each drinks as { strDrinkThumb, strDrink, idDrink } (idDrink)}
         <div class="card">
