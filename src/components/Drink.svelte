@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from "svelte";
+  import { fly } from "svelte/transition";
 
   import { getIngredients, getMeasurements } from "../utils/util";
   export let drink;
@@ -30,7 +31,7 @@
   });
 </script>
 
-<div class="card">
+<div class="card" out:fly={{ x: -50, duration: 500 }}>
   <img src={drink.strDrinkThumb} alt={drink.strDrink} />
   <div>
     <h1>{drink.strDrink}</h1>
