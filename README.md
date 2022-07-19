@@ -1,5 +1,5 @@
 # BoozeApp
-## Live deploy: [here](https://idas-boozeapp.netlify.app/)
+## Live deploy: [here](https://boozeapp.netlify.app/)
 <br/>
 
 ### This project was made with the Svelte framework and with help of the [CocktailDB](https://www.thecocktaildb.com/api.php) API
