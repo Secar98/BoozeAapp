@@ -47,7 +47,7 @@
 </script>
 
 <main>
-	<h1 class="header">IDAS BAR</h1>
+	<h1 class="header">Booze App</h1>
 	<Searchbar on:search={onSearch} />
 	{#if !detailedView}
 		<FilterButtons
